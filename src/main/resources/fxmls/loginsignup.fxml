@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="primaryPane" maxWidth="-Infinity" minHeight="730.0" minWidth="400.0" prefHeight="730.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gardenthyme.gui.controllers.LoginSignup">
+    <children>
+        <VBox fx:id="vbox" alignment="CENTER" prefHeight="690.0" prefWidth="360.0" spacing="30.0">
+            <padding>
+                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+            </padding>
+         <children>
+            <Label fx:id="title" text="Label" textAlignment="CENTER" textFill="#e293d2" wrapText="true">
+               <font>
+                  <Font name="Forte" size="38.0" />
+               </font>
+            </Label>
+            <Button fx:id="switchButton" mnemonicParsing="false" text="Don't have an account? Click here!" />
+            <VBox fx:id="usernameContainer" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Username" />
+                  <TextField fx:id="usernameInput" />
+               </children>
+            </VBox>
+            <VBox fx:id="roleContainer">
+            <children>
+               <Label text="Account Type" />
+               <ChoiceBox fx:id="roleChoice" />
+            </children>
+         </VBox>
+            <VBox fx:id="emailContainer" layoutX="60.0" layoutY="326.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="emailLabel" text="Email" />
+                  <TextField fx:id="emailInput" />
+               </children>
+            </VBox>
+            <VBox fx:id="passwordContainer" layoutX="60.0" layoutY="431.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Password" />
+                  <TextField fx:id="passwordInput" />
+               </children>
+            </VBox>
+            <Button fx:id="submitButton" layoutX="184.0" layoutY="271.0" mnemonicParsing="false" text="Button" />
+            <Label fx:id="errorLabel" textFill="red" wrapText="true" />
+         </children>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="primaryPane" maxWidth="-Infinity" minHeight="730.0" minWidth="400.0" prefHeight="730.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gardenthyme.gui.controllers.Info">
+    <children>
+        <VBox fx:id="baseVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <HBox fx:id="titleBar" alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="60.0" prefWidth="400.0" spacing="10.0">
+                    <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToGarden" style="-fx-background-color: #D81B60; -fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand; -fx-padding: 5 12 5 12;" text="← Back" />
+                        <Label fx:id="titleLabel" text="Plant Information" textFill="#4a0025" wrapText="true">
+                            <font>
+                                <Font name="Segoe UI Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <VBox fx:id="buttonContainer" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                                    <children>
+                                        <Button fx:id="newLogButton" mnemonicParsing="false" style="-fx-background-color: #E91E63; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand;" text="📋 New Log" />
+                                        <Button fx:id="newTaskButton" mnemonicParsing="false" style="-fx-background-color: #E91E63; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand;" text="✓ New Task" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="3.0" left="10.0" right="10.0" top="3.0" />
+                    </padding>
+                </HBox>
+                <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" minWidth="300.0" prefWidth="200.0" vbarPolicy="NEVER">
+                    <content>
+                        <VBox fx:id="contentVBox" alignment="TOP_CENTER" spacing="10.0">
+                            <children>
+                                <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                
+                                <!-- Plant Name Labels -->
+                                <Label fx:id="commonNameLabel" alignment="CENTER" text="Plant Name" textFill="#4a0025" wrapText="true">
+                                    <font>
+                                        <Font name="Segoe UI Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="scienceNameLabel" alignment="CENTER" text="Scientific Name" textFill="#d81b60" wrapText="true">
+                                    <font>
+                                        <Font name="Segoe UI" size="14.0" />
+                                    </font>
+                                </Label>
+                                
+                                <Label text="Description">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Text fx:id="descText" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a plant that contains plant information." textAlignment="CENTER" />
+                                <Accordion fx:id="dropdownContainer">
+                                    <panes>
+                                        <TitledPane animated="false" text="Growth Instructions">
+                                            <content>
+                                                <VBox>
+                                                    <children>
+                                                        <Text fx:id="instructionText" strokeType="OUTSIDE" strokeWidth="0.0" text="1) Plant 2) Water" textAlignment="CENTER" />
+                                                    </children>
+                                                </VBox>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Harvest Log">
+                                            <content>
+                                                <VBox />
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Pests">
+                                            <content>
+                                                <VBox />
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Tasks">
+                                            <content>
+                                                <VBox fx:id="tasksContent" />
+                                            </content>
+                                        </TitledPane>
+                                    </panes>
+                                </Accordion>
+                            </children>
+                        </VBox>
+                    </content>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </ScrollPane>
+            </children>
+        </VBox>
+        
+                          <!-- Hidden popup for New Log (initially not visible) -->
+        <VBox fx:id="newLogVBox" managed="false" spacing="10.0" style="-fx-background-color: #FFFFFF; -fx-padding: 15; -fx-border-color: #F48FB1; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <children>
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Quantity:" />
+                <TextField fx:id="logQuantityField" promptText="Quantity harvested" />
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Harvest Date:" />
+                <DatePicker fx:id="logDatePicker" promptText="Select date" />
+                <Button fx:id="createLogButton" mnemonicParsing="false" style="-fx-background-color: #E91E63; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Create Log" />
+            </children>
+        </VBox>
+        
+              <!-- Hidden popup for New Task (initially not visible) -->
+        <VBox fx:id="newTaskVBox" managed="false" spacing="10.0" style="-fx-background-color: #FFFFFF; -fx-padding: 15; -fx-border-color: #F48FB1; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <children>
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Task Description:" />
+                <TextField fx:id="taskField" promptText="What needs to be done?" />
+                
+                      <HBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <ToggleButton fx:id="oneTimeToggle" mnemonicParsing="false" style="-fx-background-color: #F48FB1; -fx-text-fill: #4A0025; -fx-font-weight: bold; -fx-background-radius: 15;" text="One Time" />
+                        <ToggleButton fx:id="reoccurringToggle" mnemonicParsing="false" style="-fx-background-color: #F8BBD0; -fx-text-fill: #4A0025; -fx-font-weight: bold; -fx-background-radius: 15;" text="Reoccurring" />
+                    </children>
+                </HBox>
+                
+                      <VBox fx:id="oneTimeBox" spacing="5.0">
+                    <children>
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Due Date:" />
+                        <DatePicker fx:id="oneDatePicker" promptText="Select due date" />
+                    </children>
+                </VBox>
+                
+                      <VBox fx:id="reoccurringBox" managed="false" spacing="5.0" visible="false">
+                    <children>
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Start Date:" />
+                        <DatePicker fx:id="startDatePicker" promptText="Select start date" />
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Repeat Every (days):" />
+                        <TextField fx:id="repeatDaysField" promptText="e.g., 7 for weekly" text="7" />
+                  <Label layoutX="10.0" layoutY="10.0" style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Repeat Until:" />
+                  <DatePicker fx:id="endDatePicker" layoutX="10.0" layoutY="33.0" promptText="Select start date" />
+                    </children>
+                </VBox>
+            <Label layoutX="26.0" layoutY="26.0" style="-fx-font-weight: bold; -fx-text-fill: #4A0025;" text="Assigned Users" />
+            <FlowPane fx:id="assignedUsersFlow" prefWidth="200.0" />
+            <ScrollPane fx:id="assignGardenerSPane" prefHeight="100.0" prefWidth="200.0">
+               <content>
+                  <VBox fx:id="gardenersListVBox" prefHeight="200.0" spacing="5.0" />
+               </content>
+            </ScrollPane>
+                
+                      <Button fx:id="createTaskButton" mnemonicParsing="false" style="-fx-background-color: #E91E63; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;" text="Create Task" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

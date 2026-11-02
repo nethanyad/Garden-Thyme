@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="primaryPane" maxWidth="-Infinity" minHeight="730.0" minWidth="400.0" prefHeight="730.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gardenthyme.gui.controllers.AdminView">
+    <children>
+        <VBox fx:id="baseVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <HBox fx:id="titleBar" alignment="CENTER" maxWidth="-Infinity" prefHeight="60.0" prefWidth="400.0" spacing="20.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#backToProfile" text="Back" />
+                        <Label fx:id="title" text="Your Garden">
+                            <font>
+                                <Font name="Forte" size="33.0" />
+                            </font>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#handleToggle" text="Switch DB" />
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <Button fx:id="addToDBButton" mnemonicParsing="false" text="+ New Plant" />
+                <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" minWidth="300.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+                    <content>
+                        <VBox fx:id="contentVBox" alignment="TOP_CENTER" prefWidth="100.0" spacing="10.0" />
+                    </content>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </ScrollPane>
+            </children>
+        </VBox>
+
+        <VBox fx:id="plantEditVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0" spacing="5.0" visible="false">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Common Name" />
+                        <TextField fx:id="cnField" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Scientific Name" />
+                        <TextField fx:id="snField" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                    <children>
+                        <Label text="Weather Data" />
+                        <VBox>
+                            <children>
+                                <Label text="Best Month to Start" />
+                                <ComboBox fx:id="monthCBox" prefWidth="150.0" visibleRowCount="12" />
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <!-- FIX: removed extra static "C" label — binding adds °C already -->
+                                <HBox prefHeight="30.0" prefWidth="200.0">
+                                    <children>
+                                        <Label text="Ideal Temperature: " />
+                                        <Label fx:id="tempLabel" text="20°C" />
+                                    </children>
+                                </HBox>
+                                <Slider fx:id="tempSlider" blockIncrement="0.1" max="40.0" min="-40.0" />
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <!-- FIX: removed extra static "%" label — binding adds % already -->
+                                <HBox prefHeight="30.0" prefWidth="200.0">
+                                    <children>
+                                        <Label text="Ideal Humidity: " />
+                                        <Label fx:id="humidityLabel" text="60%" />
+                                    </children>
+                                </HBox>
+                                <Slider fx:id="humiditySlider" blockIncrement="0.1" />
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <Label text="Ideal Sunlight" />
+                                <ComboBox fx:id="sunCBox" prefWidth="150.0" visibleRowCount="5" />
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Growth Instructions" />
+                        <TextArea fx:id="instrField" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Ideal Soil" />
+                        <TextField fx:id="soilField" />
+                    </children>
+                </VBox>
+                <Button fx:id="applyButton" mnemonicParsing="false" text="Apply Changes" />
+            </children>
+        </VBox>
+
+        <VBox fx:id="pestEditVBox" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="300.0" spacing="5.0">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Name" />
+                        <TextField fx:id="nField" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Effective Pesticides" />
+                        <FlowPane fx:id="pesticidesFlow" prefHeight="200.0" prefWidth="200.0" />
+                        <HBox prefHeight="10.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="addPesticideField" />
+                                <Button fx:id="addPesticideButton" mnemonicParsing="false" text="Add" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Signs" />
+                        <TextArea fx:id="signsField" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                    </children>
+                </VBox>
+                <Button fx:id="applyButtonPests" mnemonicParsing="false" text="Apply Changes" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
